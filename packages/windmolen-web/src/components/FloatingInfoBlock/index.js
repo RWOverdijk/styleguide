@@ -41,7 +41,7 @@ const StyledInnerContainer = styled.div`
 `
 
 const FloatingInfoBlock = ({ children, iconProps, ...props }: Props) => (
-  <StyledFloatingInfoBlock>
+  <StyledFloatingInfoBlock {...props}>
     {iconProps.name && (
       <StyledIconContainer backgroundColor={props.iconBackgroundColor}>
         <Icon
