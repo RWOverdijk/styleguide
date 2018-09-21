@@ -27,6 +27,10 @@ type InputProps = {
 };
 
 const getInputState = (props: InputProps): string => {
+  if (!props.touched) {
+    return colors.charcoalGray;
+  }
+
   if (props.isValid) {
     return colors.green;
   }
@@ -55,21 +59,16 @@ const StyledInputLine = styled(Base.withComponent('div'))`
   transform: translateX(-50%);
   width: 0;
   background-color: ${colors.charcoalGray};
+
   ${props => {
-    if (props.disabled) {
+    if (props.disabled || !props.touched) {
       return;
     }
 
-    if (props.touched && (!props.isValid || props.error)) {
-      return `
-        background-color: ${getInputState(props)};
-        width: 100%;
-      `;
-    } else if (props.isValid && props.touched) {
-      return `
-        width: 100%;
-        background-color: ${getInputState(props)};
-      `;
+    return `
+      background-color: ${getInputState(props)};
+      width: 100%;
+    `;
     }
   }}
 `;
