@@ -65,7 +65,7 @@ const StyledInputLine = styled(Base.withComponent('div'))`
         background-color: ${getInputState(props)};
         width: 100%;
       `;
-    } else if (props.isValid) {
+    } else if (props.isValid && props.touched) {
       return `
         width: 100%;
         background-color: ${getInputState(props)};
