@@ -15,7 +15,6 @@ export default {
   },
 
   modifyBundlerConfig: (config) => {
-    console.log(config.plugins);
     return config;
   }
 };
