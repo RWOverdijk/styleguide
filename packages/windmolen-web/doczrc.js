@@ -3,7 +3,7 @@ import { babel } from 'docz-plugin-babel6';
 export default {
   src: './src',
   dest: '.docz/dist',
-  base: '/web/',
+  base: '/',
   plugins: [babel()],
 
   themeConfig: {
@@ -15,7 +15,6 @@ export default {
   },
 
   modifyBundlerConfig: (config) => {
-    console.log(config.plugins);
     return config;
   }
 };
