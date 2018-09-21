@@ -141,7 +141,7 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
     padding-right: 20px;
   ` : `
     display: inline;
-    font-weight: inherit;
+    font-weight: ${props => props.fontWeight || 'inherit'};
     width: auto;
   `}
 
