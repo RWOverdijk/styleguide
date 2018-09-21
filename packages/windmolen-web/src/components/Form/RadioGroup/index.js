@@ -1,3 +1,4 @@
+// @flow
 import React, { type Node } from 'react';
 import styled from 'styled-components';
 
@@ -5,11 +6,12 @@ type Props = {
   children: Node,
   name?: string,
   value?: string,
-  onChange?: func,
+  onChange: Function,
   variant?: string,
   iconVariant?: number,
   iconVariantChecked?: number,
   iconFontSize?: string,
+  desktopIconFontSize?: string,
 };
 
 const StyledRadioGroup = styled.div``;
@@ -39,7 +41,7 @@ const RadioGroup = ({
         iconFontSize,
         desktopIconFontSize,
         checked: value === child.props.value,
-        onChange: (checked) => {
+        onChange: () => {
           onChange(child.props.value);
         },
       });
@@ -48,7 +50,7 @@ const RadioGroup = ({
 );
 
 RadioGroup.defaultProps = {
-  onChange: () => {},
+  onChange() {},
 };
 
 export default RadioGroup;
