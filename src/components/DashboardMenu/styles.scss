@@ -78,12 +78,12 @@
     }
 
     &::after {
-      background: linear-gradient(to right, $color-grey-light, $color-white 90%);
+      background: linear-gradient(to right, $color-grey-light, transparent);
       left: 0;
     }
 
     &::before {
-      background: linear-gradient(to left, $color-grey-light, $color-white 90%);
+      background: linear-gradient(to left, $color-grey-light, transparent);
       right: 0;
     }
 
