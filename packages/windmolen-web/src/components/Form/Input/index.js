@@ -18,11 +18,18 @@ type InputProps = {
   suggestions?: Array<Object>,
   onChange?: Function,
   autoCompleteProps?: Object,
+  placeholder?: string,
 
-  /** The name of the icon. */
+  /** Keep placeholderRight visible even if input has text */
+  placeholderAlwaysVisible?: boolean,
+  /** Padding on the right-hand side, to account for an always visible right
+   * placeholder */
+  placeholderRightPadding?: number,
+
+  /** The name of the icon */
   icon?: string,
 
-  /** CSS class for the container around `<input />`. */
+  /** CSS class for the container around `<input />` */
   className?: string
 };
 
@@ -44,6 +51,16 @@ const getInputState = (props: InputProps): string => {
 
 const StyledInputWrapper = styled(Base.withComponent('div'))`
   position: relative;
+
+  &::after {
+    content: "${props => props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder}";
+    color: red;
+    color: ${props => props.disabled ? colors.silver : colors.warmGray};
+    position: absolute;
+    top: calc(1em + 1px);
+    right: 20px;
+    z-index: 3;
+  }
 `;
 
 const StyledInputLine = styled(Base.withComponent('div'))`
@@ -69,9 +86,17 @@ const StyledInputLine = styled(Base.withComponent('div'))`
       background-color: ${getInputState(props)};
       width: 100%;
     `;
-    }
-  }}
-`;
+  }
+}`;
+
+const rightPaddingWithIconAndPlaceholder = (props) => {
+  const iconPadding = props.icon ? 70 : 20;
+  const placeholderPadding = props.placeholderRight && props.placeholderAlwaysVisible
+    ? props.placeholderRightPadding
+    : 0;
+
+  return `${iconPadding + placeholderPadding}px`;
+};
 
 const StyledInputElement = styled(Base.withComponent('input'))`
   background-color: ${colors.alabaster};
@@ -81,7 +106,7 @@ const StyledInputElement = styled(Base.withComponent('input'))`
   display: block;
   outline: 0;
   padding: 9px 20px;
-  padding-right: ${props => props.icon ? '70px' : '20px'};
+  padding-right: ${rightPaddingWithIconAndPlaceholder};
   width: 100%;
   height: 50px;
   position: relative;
@@ -130,17 +155,22 @@ class StyledInput extends Component<InputProps, { value: string }> {
 
   render() {
     // don't let props.onChange overwrite this.onChange
-    //
     // eslint-disable-next-line no-unused-vars
     const { onChange, ...props } = this.props;
 
+    // only show the native placeholder if we're not using ::after to fake it
+    const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
+      ? ''
+      : props.placeholder;
+
     return (
-      <StyledInputWrapper>
+      <StyledInputWrapper {...props}>
         <StyledInputElement
           innerRef={this.input}
           value={this.state.value}
           onChange={this.onChange}
           {...props}
+          placeholder={placeholder}
         />
         <StyledInputLine value={this.state.value} {...this.props} />
       </StyledInputWrapper>
@@ -282,6 +312,7 @@ const Input = ({ className, autoCompleteProps, ...props }: InputProps) => {
 Input.defaultProps = {
   type: 'text',
   fontSize: 'body-xsmall',
+  placeholderRightPadding: 35
 };
 
 export default Input;
