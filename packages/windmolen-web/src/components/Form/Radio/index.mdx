@@ -84,64 +84,92 @@ styling should be applied in the webapp.
 The `RadioGroup` has props that will be passed to the child `Radio` components.
 Check out the `Props` section at the `RadioGroup` component.
 
+### button-large
 <Playground wrapper={Wrapper}>
-  <div>
-    <H3>button-large</H3>
-    <RadioGroup
-      name="gender"
+  <RadioGroup
+    name="gender"
+    value="people1"
+    onChange={(value) => {
+      console.log('Using variants - onChange', value);
+    }}
+    variant="button-large"
+    iconFontSize="170%"
+    desktopIconFontSize="300%"
+  >
+    <Radio
+      label="1"
       value="people1"
-      onChange={(value) => {
-        console.log('Using variants - onChange', value);
-      }}
-      variant="button-large"
-      iconFontSize="170%"
-      desktopIconFontSize="300%"
-    >
-      <Radio
-        label="1"
-        value="people1"
-        icon="people--one"
-      />
-      <Radio
-        label="2"
-        value="people2"
-        icon="people--two"
-      />
-      <Radio
-        label="3"
-        value="people3"
-        icon="people--three"
-      />
-    </RadioGroup>
-  </div>
-
-  <div style={{ marginTop: '60px' }}>
-    <H3>button-small</H3>
-    <RadioGroup
-      name="gender"
+      icon="people--one"
+    />
+    <Radio
+      label="2"
       value="people2"
-      onChange={(value) => {
-        console.log('Using variants - onChange', value);
-      }}
-      variant="button-small"
-    >
-      <Radio
-        label="1"
-        value="people1"
-        icon="people--one--thick"
-      />
-      <Radio
-        label="2"
-        value="people2"
-        icon="people--two--thick"
-      />
-      <Radio
-        label="3"
-        value="people3"
-        icon="people--three--thick"
-      />
-    </RadioGroup>
-  </div>
+      icon="people--two"
+    />
+    <Radio
+      label="3"
+      value="people3"
+      icon="people--three"
+    />
+  </RadioGroup>
+</Playground>
+
+### button-small
+<Playground wrapper={Wrapper}>
+  <RadioGroup
+    name="gender"
+    value="people2"
+    onChange={(value) => {
+      console.log('Using variants - onChange', value);
+    }}
+    variant="button-small"
+  >
+    <Radio
+      label="1"
+      value="people1"
+      icon="people--one--thick"
+    />
+    <Radio
+      label="2"
+      value="people2"
+      icon="people--two--thick"
+    />
+    <Radio
+      label="3"
+      value="people3"
+      icon="people--three--thick"
+    />
+  </RadioGroup>
+</Playground>
+
+### button-always-small
+
+`button-always-small` variant does not expand on mobile
+<Playground wrapper={Wrapper}>
+  <RadioGroup
+    name="gender"
+    value="people2"
+    onChange={(value) => {
+      console.log('Using variants - onChange', value);
+    }}
+    variant="button-always-small"
+  >
+    <Radio
+      label="1"
+      value="people1"
+      icon="people--one--thick"
+    />
+    <Radio
+      label="2"
+      value="people2"
+      icon="people--two--thick"
+    />
+    <Radio
+      label="3"
+      value="people3"
+      icon="people--three--thick"
+    />
+  </RadioGroup>
 </Playground>
 
 ## Radio groups

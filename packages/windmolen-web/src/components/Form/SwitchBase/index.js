@@ -2,7 +2,6 @@ import React, { type Node, Component } from 'react';
 import styled, { css } from 'styled-components';
 import { media } from 'styled-bootstrap-grid';
 import Icon from '../../Icon';
-import Base from '../../Base';
 import Span from '../../Span';
 import { colors } from '../../../globals';
 import { px } from '../../../utils';
@@ -21,13 +20,13 @@ export type Props = {
   value: string,
 
   /** Specify a different switch variant. */
-  variant: 'button-large' | 'button-small',
+  variant: 'button-large' | 'button-small' | 'button-always-small',
 
   /** A callback function when the 'checked' value has been changed. */
   onChange?: func,
 
   /** Wether the toggle should be checked by default. */
-  defaultChecked?: bool,
+  defaultChecked?: boolean,
 
   /** A callback function for the input ref. */
   inputRef?: func,
@@ -45,7 +44,7 @@ export type Props = {
   labelProps: object,
 
   /** Make a controlled toggle by specifying the 'checked' property manually. */
-  checked?: bool,
+  checked?: boolean,
 
   /** The icon name for the default (unchecked) state. */
   icon?: string,
@@ -86,15 +85,21 @@ const getVariantStyle = (variant, prop, isMobile: boolean = true) => {
       width: isMobile ? '100%' : px(50),
       height: isMobile ? '100%' : px(50),
       spacing: isMobile ? px(10) : px(8),
-      spacing: isMobile ? px(10) : px(8),
     },
+
+    'button-always-small': {
+      width: px(50),
+      height: px(50),
+      spacing: px(8),
+    },
+
     'button-large': {
       width: isMobile ? '100%' : px(160),
       height: isMobile ? '100%' : px(160),
       spacing: isMobile ? px(8) : px(20),
-      spacing: isMobile ? px(8) : px(20),
     },
   };
+
   return variantStyles[variant][prop];
 };
 
@@ -103,7 +108,7 @@ const StyledIcon = styled(Icon)``;
 const StyledLabel = styled(Span)`
   vertical-align: middle;
   ${props => {
-    const margin = 5;
+    const margin = 15;
     return props.labelPlacement === 'start'
       ? `margin-right: ${margin}px;`
       : `margin-left: ${margin}px;`;
@@ -125,9 +130,11 @@ const StyledSwitchBaseCore = styled(Span)`
 `;
 
 const StyledSwitchBaseButtonWrapper = styled.div`
-  display: flex;
+  display: ${props => props.variant === 'button-always-small' ? 'inline-flex' : 'flex'};
   padding-top: ${props => getVariantStyle(props.variant, 'spacing')}
   padding-bottom: ${props => getVariantStyle(props.variant, 'spacing')}
+  padding-left: ${props => getVariantStyle(props.variant, 'spacing', true)}
+  padding-right: ${props => getVariantStyle(props.variant, 'spacing', true)}
 
   ${media.desktop`
     display: inline-flex;
@@ -143,7 +150,7 @@ const StyledSwitchBaseButton = styled.div`
   box-shadow: 0 0 5px 0 rgba(51, 61, 71, 0.2);
   background-color: ${colors.white};
   display: inline-flex;
-  justify-content: flex-start;
+  justify-content: ${props => props.variant === 'button-always-small' ? 'center' : 'flex-start'};
   align-items: center;
   user-select: none;
   width: ${props => getVariantStyle(props.variant, 'width')}
@@ -173,7 +180,7 @@ const StyledSwitchBaseButton = styled.div`
   }
 
   ${StyledLabel} {
-    ${props => props.variant === 'button-small' && 'display: none;'}
+    ${props => (props.variant === 'button-small' || props.variant === 'button-always-small') && 'display: none;'}
     margin: 0 0 0 12px;
     color: ${colors.charcoalGray};
 
@@ -205,9 +212,11 @@ const StyledSwitchBaseButton = styled.div`
 
 const StyledSwitchBase = (props) => {
   const { style, ...other } = props;
+
   switch (props.variant) {
     case 'button-large':
     case 'button-small':
+    case 'button-always-small':
       return (
         <StyledSwitchBaseButtonWrapper {...other}>
           <StyledSwitchBaseButton style={style} {...other}>
