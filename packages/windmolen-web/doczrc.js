@@ -1,10 +1,14 @@
 import { babel } from 'docz-plugin-babel6';
+import { css } from 'docz-plugin-css';
 
 export default {
   src: './src',
   dest: '.docz/dist',
   base: '/',
-  plugins: [babel()],
+  plugins: [
+    babel(),
+    css()
+  ],
 
   themeConfig: {
     styles: {
@@ -15,6 +19,10 @@ export default {
   },
 
   modifyBundlerConfig: (config) => {
+    // add windmolen.css to `entry`
+    const entry = ['./src/windmolen.css', ...config.entry.app.slice()];
+    config.entry.app = entry;
+
     return config;
   }
 };
