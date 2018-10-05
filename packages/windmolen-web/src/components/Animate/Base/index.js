@@ -126,7 +126,7 @@ class AnimateBase extends Component<Props> {
     if (this.scrollableParent.innerHeight !== undefined) {
       return this.scrollableParent.innerHeight;
     }
-    return this.scrollableParent.clientHeight;
+    return this.scrollableParent.clientHeight || 0;
   }
 
   getViewportTop() {
@@ -156,7 +156,8 @@ class AnimateBase extends Component<Props> {
 
   getVisibility() {
     const elementTop = this.getElementTop(this.node) - this.getElementTop(this.scrollableParent);
-    const elementBottom = elementTop + this.node.clientHeight;
+    const clientHeight = this.node && this.node.clientHeight ? this.node.clientHeight : 0;
+    const elementBottom = elementTop + clientHeight;
     return {
       inViewport: this.inViewport(elementTop, elementBottom),
       isAboveViewport: this.isAboveViewport(elementBottom),
