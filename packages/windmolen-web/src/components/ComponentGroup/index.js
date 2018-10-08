@@ -78,8 +78,7 @@ const getSeparator = (type, placement) => {
   }
 };
 
-const StyledComponentGroup = ({ wrapper, children, ...props }) => {
-  const Group = styled(Base.withComponent(wrapper)).attrs(props)`
+const StyledComponentGroup = styled(Base.withComponent('div'))`
     ${props => getSeparator(props.separator, props.separatorPlacement)}
     ${props => getSpacing('mobile', props.divider, props.spacing, 'margin', 'top-bottom')}
     ${props => getSpacing('mobile', props.divider, props.padding, 'padding', 'top-bottom')}
@@ -89,12 +88,6 @@ const StyledComponentGroup = ({ wrapper, children, ...props }) => {
       ${props => getSpacing('desktop', props.divider, props.padding, 'padding', 'top-bottom')}
     `}
   `;
-  return (
-    <Group>
-      {children}
-    </Group>
-  );
-};
 
 const StyledComponentChild = styled(Base.withComponent('div'))`
   & + & {
