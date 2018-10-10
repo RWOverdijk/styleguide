@@ -160,7 +160,7 @@ class StyledInput extends Component<InputProps, { value: string }> {
   render() {
     // don't let props.onChange overwrite this.onChange
     // eslint-disable-next-line no-unused-vars
-    const { onChange, ...props } = this.props;
+    const { id, ...props } = this.props;
 
     // only show the native placeholder if we're not using ::after to fake it
     const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
@@ -168,15 +168,16 @@ class StyledInput extends Component<InputProps, { value: string }> {
       : props.placeholder;
 
     return (
-      <StyledInputWrapper {...props}>
+      <StyledInputWrapper>
         <StyledInputElement
           innerRef={this.input}
           value={this.state.value}
           onChange={this.onChange}
+          id={id}
           {...props}
           placeholder={placeholder}
         />
-        <StyledInputLine value={this.state.value} {...this.props} />
+        <StyledInputLine value={this.state.value} {...props} />
       </StyledInputWrapper>
     );
   }
@@ -186,7 +187,7 @@ const Container = styled(Base)`
   position: relative;
 `;
 
-const StyledLabel = styled(Base)`
+const StyledLabel = styled(Base.withComponent('label'))`
   color: ${colors.charcoalGray};
   margin-bottom: 5px;
   font-weight: bold;
@@ -271,7 +272,7 @@ const Input = ({ className, autoCompleteProps, ...props }: InputProps) => {
   return (
     <Container className={className}>
       {props.label && (
-        <StyledLabel>{props.label}</StyledLabel>
+        <StyledLabel for={props.id}>{props.label}</StyledLabel>
       )}
 
       {props.suggestions ? (
