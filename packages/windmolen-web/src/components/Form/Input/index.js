@@ -102,7 +102,10 @@ const StyledInputElement = styled(Base.withComponent('input'))`
   background-color: ${colors.alabaster};
   border: 0;
   box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.12);
-  color: ${props => props.disabled ? colors.silver : colors.charcoalGray};
+  color: ${props => props.disabled ? colors.silver : colors.warmGray};
+  ${props => props.disabled && `
+    cursor: not-allowed;
+  `}
   display: block;
   outline: 0;
   padding: 9px 20px;
@@ -111,6 +114,7 @@ const StyledInputElement = styled(Base.withComponent('input'))`
   height: 50px;
   position: relative;
   z-index: 2;
+  font-size: 16px;
 
   &:active,
   &:focus {
@@ -185,10 +189,8 @@ const Container = styled(Base)`
 const StyledLabel = styled(Base)`
   color: ${colors.charcoalGray};
   margin-bottom: 5px;
-
-  ${media.desktop`
-    margin-bottom: 10px;
-  `}
+  font-weight: bold;
+  font-size: 18px;
 `;
 
 const StyledErrorMessage = styled(Base)`
