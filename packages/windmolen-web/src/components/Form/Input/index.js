@@ -160,7 +160,7 @@ class StyledInput extends Component<InputProps, { value: string }> {
   render() {
     // don't let props.onChange overwrite this.onChange
     // eslint-disable-next-line no-unused-vars
-    const { id, ...props } = this.props;
+    const { onChange, id, ...props } = this.props;
 
     // only show the native placeholder if we're not using ::after to fake it
     const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
