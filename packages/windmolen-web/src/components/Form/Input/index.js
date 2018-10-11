@@ -168,7 +168,7 @@ class StyledInput extends Component<InputProps, { value: string }> {
       : props.placeholder;
 
     return (
-      <StyledInputWrapper>
+      <StyledInputWrapper {...props}>
         <StyledInputElement
           innerRef={this.input}
           value={this.state.value}
