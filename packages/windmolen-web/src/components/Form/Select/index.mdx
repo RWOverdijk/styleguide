@@ -1,0 +1,22 @@
+---
+name: Select
+menu: Forms
+route: /Forms/Select
+---
+
+import { Playground, PropsTable } from 'docz';
+import Wrapper from '../../Wrapper';
+import Select from './';
+
+# Select
+
+## Props
+<PropsTable of={Select} />
+
+## Basic usage
+<Playground wrapper={Wrapper}>
+  <Select>
+    <option value="female">Female</option>
+    <option value="male">Male</option>
+  </Select>
+</Playground>
