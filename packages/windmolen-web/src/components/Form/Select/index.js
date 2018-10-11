@@ -21,7 +21,8 @@ const StyledSelectWrapper = styled.div`
 const StyledIcon = styled(Icon)`
   pointer-events: none;
   position: absolute;
-  right: 0;
+  right: 5px;
+  transform: rotate(90deg);
 `;
 
 const StyledSelect = styled.select`
@@ -39,7 +40,7 @@ const Select = ({ children }: Props) => (
     <StyledSelect>
       {children}
     </StyledSelect>
-    <StyledIcon name="arrow-right" fontSize="40px" />
+    <StyledIcon name="arrow-right" fontSize="30px" />
   </StyledSelectWrapper>
 );
 
