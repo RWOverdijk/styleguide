@@ -32,3 +32,4 @@ export { default as Checkbox } from './components/Form/Checkbox';
 export { default as Toggle } from './components/Form/Toggle';
 export { default as Radio } from './components/Form/Radio';
 export { default as RadioGroup } from './components/Form/RadioGroup';
+export { default as Select } from './components/Form/Select';
