@@ -9,10 +9,15 @@ type Props = {
   responsive?: boolean,
 
   /** Specify a specific aspect ratio for the image */
-  aspectRatio?: '16:9'| '4:3' | '1:1',
+  aspectRatio?: '16:9' | '4:3' | '1:1',
+
+  /** Specify a @2x image for high dpi displays. */
+  src2x?: string
 };
 
-const StyledImage = styled(Base.withComponent('img'))`
+const StyledImage = styled(Base.withComponent('img')).attrs({
+  srcSet: props => props.srcSet
+})`
   ${props => props.responsive && `
     max-width: 100%;
     height: auto;
@@ -31,27 +36,30 @@ const StyledImageContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
+`;
 
 const Image = ({ aspectRatio, ...props }: Props) => {
+  const srcSet = (props.src2x ? `${props.src} 1x, ${props.src2x} 2x` : null);
+
   if (aspectRatio) {
     const [width, height] = aspectRatio.split(':');
     const paddingBottom = (height / width) * 100;
     return (
       <StyledImageContainer paddingBottom={paddingBottom}>
-        <StyledImage {...props} />
+        <StyledImage srcSet={srcSet} {...props} />
       </StyledImageContainer>
     );
   }
 
   return (
-    <StyledImage {...props} />
+    <StyledImage srcSet={srcSet} {...props} />
   );
 };
 
 Image.defaultProps = {
   responsive: true,
   aspectRatio: null,
+  src2x: null
 };
 
 export default Image;
