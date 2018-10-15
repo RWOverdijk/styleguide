@@ -28,6 +28,7 @@ type InputProps = {
 
   /** The name of the icon */
   icon?: string,
+  iconVariant?: string,
 
   /** CSS class for the container around `<input />` */
   className?: string
@@ -208,17 +209,21 @@ const StyledIcon = styled(Icon)`
 
 const StyledIconContainer = styled(Base)`
   position: absolute;
-  top: 0;
   right: 0;
   bottom: 0;
   width: 50px;
-  background-color: ${colors.charcoalGray};
+  height: 50px;
+  background-color: ${props => props.iconVariant === 'primary' ? colors.charcoalGray : colors.white};
   z-index: 3;
+
+  ${props => props.iconVariant === 'alternate' &&
+    `box-shadow: rgba(51, 61, 71, 0.12) 0px 0px 8px 0px;`
+  }
 
   &:focus,
   &:active,
   &:hover {
-    background-color: ${colors.shuttleGray};
+    background-color: ${props => props.iconVariant === 'primary' ? colors.shuttleGray : colors.alabaster};
   }
 
   &:hover {
@@ -268,7 +273,7 @@ const StyledAutoSuggestion = styled(Base)`
   }
 `;
 
-const Input = ({ className, autoCompleteProps, ...props }: InputProps) => {
+const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputProps) => {
   return (
     <Container className={className}>
       {props.label && (
@@ -304,8 +309,8 @@ const Input = ({ className, autoCompleteProps, ...props }: InputProps) => {
       )}
 
       {props.icon && (
-        <StyledIconContainer onClick={props.onIconClick}>
-          <StyledIcon variant={1} name={props.icon} fontSize="40px" />
+        <StyledIconContainer iconVariant={iconVariant} onClick={props.onIconClick}>
+          <StyledIcon variant={iconVariant === 'primary' ? 1 : 0} name={props.icon} fontSize="40px" />
         </StyledIconContainer>
       )}
     </Container>
@@ -315,7 +320,8 @@ const Input = ({ className, autoCompleteProps, ...props }: InputProps) => {
 Input.defaultProps = {
   type: 'text',
   fontSize: 'body-xsmall',
-  placeholderRightPadding: 35
+  placeholderRightPadding: 35,
+  iconVariant: 'primary'
 };
 
 export default Input;
