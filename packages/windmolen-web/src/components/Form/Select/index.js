@@ -1,12 +1,25 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type Node, Fragment } from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../globals';
+import Base from '../../Base';
 import Icon  from '../../Icon';
 
 type Props = {
   children: HTMLOptionsCollection
 };
+
+const StyledLabel = styled(Base.withComponent('label'))`
+  color: ${colors.charcoalGray};
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 18px;
+`;
+
+const Wrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+`;
 
 const StyledSelectWrapper = styled.div`
   display: inline-flex;
@@ -35,13 +48,18 @@ const StyledSelect = styled.select`
   -webkit-appearance: none;
 `;
 
-const Select = ({ children }: Props) => (
-  <StyledSelectWrapper>
-    <StyledSelect>
-      {children}
-    </StyledSelect>
-    <StyledIcon name="arrow-right" fontSize="30px" />
-  </StyledSelectWrapper>
+const Select = ({ children, label, id, ...props }: Props) => (
+  <Wrapper>
+    {label && (
+      <StyledLabel for={id}>{label}</StyledLabel>
+    )}
+    <StyledSelectWrapper>
+      <StyledSelect id={id} {...props}>
+        {children}
+      </StyledSelect>
+      <StyledIcon name="arrow-right" fontSize="30px" />
+    </StyledSelectWrapper>
+  </Wrapper>
 );
 
 export default Select;
