@@ -24,6 +24,9 @@ export type Props = {
   /** Specifiy a size (will be applied to very specific images). */
   size?: string,
 
+  /** Disable the shadow */
+  noShadow?: boolean,
+
   /** The content itself. */
   children?: Node
 };
@@ -119,9 +122,9 @@ const StyledContentBlock = styled(Base.withComponent('div'))`
 
   .content-block--image-wrapper {
     &:first-child img {
-      box-shadow: -20px 14px 20px 0 rgba(0, 0, 0, 0.18);
+      box-shadow: ${props => props.noShadow ? null : '-20px 14px 20px 0 rgba(0, 0, 0, 0.18)'};
       ${media.desktop`
-        box-shadow: -40px 28px 40px 0 rgba(0, 0, 0, 0.18);
+        box-shadow: ${props => props.noShadow ? null : '-40px 28px 40px 0 rgba(0, 0, 0, 0.18)'};
       `}
     }
   }
@@ -162,38 +165,17 @@ const ContentBlock = ({ children, ...props }: Props) => {
 
   const renderContent = (images) => {
     switch (images.length) {
-      case 2:
-        return (
-          <StyledContainer>
-            <StyledRow>
-              <div className="content-block--images-container">
-                {images.map(({ key, size, ...props, }) => (
-                  <div className={classNames('content-block--image-wrapper', {
-                    [`size--${size}`]: size,
-                  })}
-                  key={key}
-                >
-                    <StyledImage
-                      className="content-block--image"
-                      {...props}
-                    />
-                  </div>
-                ))}
-              </div>
-              <Col className="content-block--content-wrapper" {...colAttrs}>
-                {children}
-              </Col>
-            </StyledRow>
-          </StyledContainer>
-        );
-
-      case 1:
-      default:
-        return (
-          <Fragment>
+    case 2:
+      return (
+        <StyledContainer>
+          <StyledRow>
             <div className="content-block--images-container">
-              {images.map(({ key, ...props, }) => (
-                <div className="content-block--image-wrapper" key={key}>
+              {images.map(({ key, size, ...props, }) => (
+                <div className={classNames('content-block--image-wrapper', {
+                  [`size--${size}`]: size,
+                })}
+                key={key}
+                >
                   <StyledImage
                     className="content-block--image"
                     {...props}
@@ -201,15 +183,37 @@ const ContentBlock = ({ children, ...props }: Props) => {
                 </div>
               ))}
             </div>
-            <StyledContainer>
-              <Row>
-                <Col className="content-block--content-wrapper" {...colAttrs}>
-                  {children}
-                </Col>
-              </Row>
-            </StyledContainer>
-          </Fragment>
-        );
+            <Col className="content-block--content-wrapper" {...colAttrs}>
+              {children}
+            </Col>
+          </StyledRow>
+        </StyledContainer>
+      );
+
+    case 1:
+    default:
+      return (
+        <Fragment>
+          <div className="content-block--images-container">
+            {images.map(({ key, ...props, }) => (
+              <div className="content-block--image-wrapper" key={key}>
+                <StyledImage
+                  className="content-block--image"
+                  {...props}
+                />
+              </div>
+            ))}
+            {this}
+          </div>
+          <StyledContainer>
+            <Row>
+              <Col className="content-block--content-wrapper" {...colAttrs}>
+                {children}
+              </Col>
+            </Row>
+          </StyledContainer>
+        </Fragment>
+      );
     }
   };
 
@@ -217,7 +221,7 @@ const ContentBlock = ({ children, ...props }: Props) => {
   const alteredImages = props.images.map(attrs => ({
     size: 'large',
     ...attrs,
-  }))
+  }));
 
   return (
     <Animate.Block>

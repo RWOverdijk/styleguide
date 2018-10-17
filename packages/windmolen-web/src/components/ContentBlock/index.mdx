@@ -262,3 +262,27 @@ NOTE: When using 1 image, it is not recommended to set an
     </Paragraph>
   </ContentBlock>
 </Playground>
+
+## No shadow
+<Playground wrapper={Wrapper}>
+  <ContentBlock
+    images={[
+      {
+        title: 'A test placeholder',
+        alt: 'A test placeholder',
+        src: 'https://via.placeholder.com/1440x800/888/fff',
+        key: 'example-1',
+      },
+    ]}
+    noShadow={true}
+  >
+    <H2>Het ontstaan Vandebron</H2>
+    <Paragraph>
+      Vandebron is ontstaan vanuit het geloof in positieve verandering: het
+      versnellen van de transitie naar 100% duurzame energie. Bijdragen aan
+      deze verandering hoeft helemaal niet ingewikkeld te zijn. We bieden
+      slimme energietoepassingen die goed zijn voor de wereld en goed voor jou.
+    </Paragraph>
+    <Button theme="alternate">Lees meer</Button>
+  </ContentBlock>
+</Playground>
