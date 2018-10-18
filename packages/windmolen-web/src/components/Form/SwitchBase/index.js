@@ -110,7 +110,7 @@ const StyledIcon = styled(Icon)``;
 const StyledLabel = styled(Span)`
   vertical-align: middle;
   ${props => {
-    const margin = 15;
+    const margin = 8;
     return props.labelPlacement === 'start'
       ? `margin-right: ${margin}px;`
       : `margin-left: ${margin}px;`;
