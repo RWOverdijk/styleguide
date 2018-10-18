@@ -122,6 +122,10 @@ const StyledSwitchBaseCore = styled(Span)`
   align-items: center;
   user-select: none;
 
+  ${props => props.type === 'radio' && `
+    margin-right: 40px;
+  `}
+
   &:hover {
     cursor: pointer;
   }
