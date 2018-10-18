@@ -43,6 +43,8 @@ export type Props = {
   /** Specify additional props that wil be passed to the label. */
   labelProps: object,
 
+  disabled: boolean,
+
   /** Make a controlled toggle by specifying the 'checked' property manually. */
   checked?: boolean,
 
@@ -307,14 +309,16 @@ class SwitchBase extends Component<Props> {
   }
 
   toggle() {
-    const checked = !this.state.checked;
-    this.setState({
-      ...this.state,
-      checked,
-    });
-
-    // Give onChange feedback to the parent.
-    this.props.onChange(checked);
+    if (!this.props.disabled) {
+      const checked = !this.state.checked;
+      this.setState({
+        ...this.state,
+        checked,
+      });
+  
+      // Give onChange feedback to the parent.
+      this.props.onChange(checked);
+    }
   }
 
   render() {
@@ -325,6 +329,7 @@ class SwitchBase extends Component<Props> {
       inputProps,
       name,
       value,
+      disabled,
       checked: checkedProp,
       labelProps,
       ...other
@@ -340,11 +345,12 @@ class SwitchBase extends Component<Props> {
     };
 
     return (
-      <StyledSwitchBase onClick={this.toggle} {...other} checked={checked}>
+      <StyledSwitchBase type={this.props.type} onClick={this.toggle} {...other} checked={checked}>
         <input
           type={switchType}
           ref={inputRef}
           checked={checked}
+          disabled={disabled}
           onChange={this.toggle}
           name={name}
           value={value}
@@ -375,6 +381,7 @@ SwitchBase.defaultProps = {
   labelPlacement: 'end',
   labelProps: {},
   defaultChecked: false,
+  disabled: false,
   checked: null,
   icon: null,
   iconVariant: 0,
