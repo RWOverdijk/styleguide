@@ -134,6 +134,7 @@ const StyledContentBlock = styled(Base.withComponent('div'))`
     display: flex;
     flex-direction: column;
     width: 100%;
+    z-index: 1;
 
     ${media.desktop`
       margin-bottom: 0;
@@ -170,18 +171,37 @@ const ContentBlock = ({ children, ...props }: Props) => {
         <StyledContainer>
           <StyledRow>
             <div className="content-block--images-container">
-              {images.map(({ key, size, ...props, }) => (
-                <div className={classNames('content-block--image-wrapper', {
-                  [`size--${size}`]: size,
-                })}
-                key={key}
-                >
-                  <StyledImage
-                    className="content-block--image"
-                    {...props}
-                  />
-                </div>
-              ))}
+              {images.map(({ key, size, ...props, }) => {
+                if (props.linkProps) {
+                  const linkProps = props.linkProps;
+                  delete props.linkProps;
+                  return (
+                    <a className={classNames('content-block--image-wrapper', {
+                      [`size--${size}`]: size,
+                    })} key={key} {...linkProps}>
+                      <StyledImage
+                        className="content-block--image"
+                        {...props}
+                      />
+                    </a>
+                  );
+
+                }
+                else {
+                  return (
+                    <div className={classNames('content-block--image-wrapper', {
+                      [`size--${size}`]: size,
+                    })}
+                    key={key}
+                    >
+                      <StyledImage
+                        className="content-block--image"
+                        {...props}
+                      />
+                    </div>
+                  );
+                }
+              })}
             </div>
             <Col className="content-block--content-wrapper" {...colAttrs}>
               {children}
@@ -195,14 +215,31 @@ const ContentBlock = ({ children, ...props }: Props) => {
       return (
         <Fragment>
           <div className="content-block--images-container">
-            {images.map(({ key, ...props, }) => (
-              <div className="content-block--image-wrapper" key={key}>
-                <StyledImage
-                  className="content-block--image"
-                  {...props}
-                />
-              </div>
-            ))}
+            {images.map(({ key, ...props, }) => {
+              if (props.linkProps) {
+                const linkProps = props.linkProps;
+                delete props.linkProps;
+                return (
+                  <a className="content-block--image-wrapper" key={key} {...linkProps}>
+                    <StyledImage
+                      className="content-block--image"
+                      {...props}
+                    />
+                  </a>
+                );
+
+              }
+              else {
+                return (
+                  <div className="content-block--image-wrapper" key={key}>
+                    <StyledImage
+                      className="content-block--image"
+                      {...props}
+                    />
+                  </div>
+                );
+              }
+            })}
             {this}
           </div>
           <StyledContainer>
