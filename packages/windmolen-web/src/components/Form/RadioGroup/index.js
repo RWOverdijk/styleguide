@@ -16,6 +16,17 @@ type Props = {
 
 const StyledRadioGroup = styled.div``;
 
+const Wrapper = styled.span`
+  ${props =>
+    props.variant !== 'button-always-small' &&
+    props.variant !== 'button-small' &&
+    props.variant !== 'button-large' &&
+  `
+    display: inline-block;
+    margin-right: 40px;
+  `}
+`;
+
 const RadioGroup = ({
   children,
   name,
@@ -33,18 +44,22 @@ const RadioGroup = ({
         return null;
       }
 
-      return React.cloneElement(child, {
-        name,
-        variant,
-        iconVariant,
-        iconVariantChecked,
-        iconFontSize,
-        desktopIconFontSize,
-        checked: value === child.props.value,
-        onChange: () => {
-          onChange(child.props.value);
-        },
-      });
+      return (
+        <Wrapper variant={variant}>
+          {React.cloneElement(child, {
+            name,
+            variant,
+            iconVariant,
+            iconVariantChecked,
+            iconFontSize,
+            desktopIconFontSize,
+            checked: value === child.props.value,
+            onChange: () => {
+              onChange(child.props.value);
+            },
+          })}
+        </Wrapper>
+      );
     })}
   </StyledRadioGroup>
 );
