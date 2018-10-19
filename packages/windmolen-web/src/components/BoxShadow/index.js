@@ -5,12 +5,13 @@ import styled from 'styled-components';
 
 export type Props = {
   children?: Node,
+  display?: string,
   small?: Boolean
 };
 
 const StyledBoxShadow = styled.div`
-  display: inline-block;
   background-color: #fff;
+  display: ${props => props.display ? props.display : 'inline-block'};
 
   ${props => !props.small && `
     box-shadow: -20px 14px 20px 0 rgba(0, 0, 0, 0.18);
@@ -30,8 +31,8 @@ const StyledBoxShadow = styled.div`
   }
 `;
 
-const BoxShadow = ({ children, small }: Props) => (
-  <StyledBoxShadow small={small}>{children}</StyledBoxShadow>
+const BoxShadow = ({ children, small, display, ...props }: Props) => (
+  <StyledBoxShadow display={display} small={small} {...props}>{children}</StyledBoxShadow>
 );
 
 export default BoxShadow;
