@@ -195,8 +195,11 @@ const StyledLeftIcon = styled(Icon)`
 `;
 
 const StyledPressableText = styled('span')`
-  flex: 1 0 auto;
+  flex: 1 1 auto;
   font-size: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 class Pressable extends React.PureComponent<PressableProps, {}> {
