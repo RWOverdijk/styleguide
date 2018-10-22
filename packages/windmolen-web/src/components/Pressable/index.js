@@ -199,7 +199,7 @@ const StyledPressableText = styled('span')`
   font-size: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: ${props => ['button-primary', 'button-alternate', 'button-outline'].includes(props.variant) ? 'nowrap' : 'normal'};
 `;
 
 class Pressable extends React.PureComponent<PressableProps, {}> {
@@ -241,7 +241,7 @@ class Pressable extends React.PureComponent<PressableProps, {}> {
     return (
       <WrapperComponent fontSize={fontSize} {...componentProps}>
         {showLeftIcon && <StyledLeftIcon name={icon} />}
-        <StyledPressableText>{children}</StyledPressableText>
+        <StyledPressableText variant={this.props.variant}>{children}</StyledPressableText>
         {showRightIcon && <StyledRightIcon name={icon} />}
       </WrapperComponent>
     );
