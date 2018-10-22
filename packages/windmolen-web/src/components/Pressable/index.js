@@ -216,7 +216,8 @@ class Pressable extends React.PureComponent<PressableProps, {}> {
   }
 
   render() {
-    const { children, icon, ...componentProps } = this.props;
+    // eslint-disable-next-line no-unused-vars
+    const { as, children, icon, ...componentProps } = this.props;
     const WrapperComponent = this.WrapperComponent;
     const showLeftIcon = this.props.variant !== 'text' && this.props.variant !== 'text-boring' && this.props.iconPlacement === 'start' && !this.props.hideIcon;
     const showRightIcon = this.props.variant !== 'text' && this.props.variant !== 'text-boring' && this.props.iconPlacement === 'end' && !this.props.hideIcon;
