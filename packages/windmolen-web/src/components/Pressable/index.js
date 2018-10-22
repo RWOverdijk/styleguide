@@ -1,5 +1,5 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { PureComponent, type Node } from 'react';
 import styled, { type ReactComponentStyled } from 'styled-components';
 import Base from '../Base';
 import { media } from 'styled-bootstrap-grid';
@@ -199,42 +199,51 @@ const StyledPressableText = styled('span')`
   font-size: inherit;
 `;
 
-const Pressable = (props: PressableProps) => {
-  const { as: baseElement, children, icon, ...componentProps } = props;
-  const Component = pressableFactory(baseElement);
-  const showLeftIcon = props.variant !== 'text' && props.variant !== 'text-boring' && props.iconPlacement === 'start' && !props.hideIcon;
-  const showRightIcon = props.variant !== 'text' && props.variant !== 'text-boring' && props.iconPlacement === 'end' && !props.hideIcon;
+class Pressable extends React.PureComponent<PressableProps, {}> {
+  static defaultProps = {
+    as: 'button',
+    variant: 'button-primary',
+    small: false,
+    hideIcon: false,
+    icon: 'arrow-right',
+    iconPlacement: 'end',
+  }
 
-  // TODO wait for do expressions to land in ecmascript, because i will NOT do `let`
-  const fontSize = (function(props) {
-    if (props.small) {
-      return 'button-small';
-    }
+  constructor(props: PressableProps) {
+    super(props);
 
-    if (props.variant === 'text' || props.variant === 'text-boring') {
-      return 'inherit';
-    }
+    this.WrapperComponent = pressableFactory(props.as);
+  }
 
-    return 'button';
-  })(props);
+  render() {
+    const { children, icon, ...componentProps } = this.props;
+    const WrapperComponent = this.WrapperComponent;
+    const showLeftIcon = this.props.variant !== 'text' && this.props.variant !== 'text-boring' && this.props.iconPlacement === 'start' && !this.props.hideIcon;
+    const showRightIcon = this.props.variant !== 'text' && this.props.variant !== 'text-boring' && this.props.iconPlacement === 'end' && !this.props.hideIcon;
 
-  return (
-    <Component fontSize={fontSize} {...componentProps}>
-      {showLeftIcon && <StyledLeftIcon name={icon} />}
-      <StyledPressableText>{children}</StyledPressableText>
-      {showRightIcon && <StyledRightIcon name={icon} />}
-    </Component>
-  );
-};
+    // TODO wait for do expressions to land in ecmascript, because i will NOT do `let`
+    const fontSize = (function(props) {
+      if (props.small) {
+        return 'button-small';
+      }
 
-Pressable.defaultProps = {
-  as: 'button',
-  variant: 'button-primary',
-  small: false,
-  hideIcon: false,
-  icon: 'arrow-right',
-  iconPlacement: 'end',
-};
+      if (props.variant === 'text' || props.variant === 'text-boring') {
+        return 'inherit';
+      }
+
+      return 'button';
+    })(this.props);
+
+    return (
+      <WrapperComponent fontSize={fontSize} {...componentProps}>
+        {showLeftIcon && <StyledLeftIcon name={icon} />}
+        <StyledPressableText>{children}</StyledPressableText>
+        {showRightIcon && <StyledRightIcon name={icon} />}
+      </WrapperComponent>
+    );
+
+  }
+}
 
 // last cast to make sure we don't accidentally mistype a prop
 (Pressable.defaultProps: PressableProps);
