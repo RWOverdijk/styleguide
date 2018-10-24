@@ -106,6 +106,7 @@ const getVariantStyle = (variant, prop, isMobile: boolean = true) => {
 };
 
 const StyledIcon = styled(Icon)`
+  flex: 1 0 auto;
   cursor: ${props => props.disabled ? 'not-allowed' : 'unset'};
 `;
 
