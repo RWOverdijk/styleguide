@@ -22,11 +22,17 @@ The checkbox component is a wrapper around the `SwitchBase` component.
 
 ## Basic usage
 <Playground wrapper={Wrapper}>
-  <Checkbox
-    onChange={(checked) => {
-      console.log('Basic usage - onChange', checked)
-    }}
-  />
+  <Checkbox />
+</Playground>
+
+## Disabled
+<Playground wrapper={Wrapper}>
+  <Checkbox disabled />
+</Playground>
+
+## Checked and disabled
+<Playground wrapper={Wrapper}>
+  <Checkbox checked disabled />
 </Playground>
 
 ## With label

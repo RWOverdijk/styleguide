@@ -105,7 +105,9 @@ const getVariantStyle = (variant, prop, isMobile: boolean = true) => {
   return variantStyles[variant][prop];
 };
 
-const StyledIcon = styled(Icon)``;
+const StyledIcon = styled(Icon)`
+  cursor: ${props => props.disabled ? 'not-allowed' : 'unset'};
+`;
 
 const StyledLabel = styled(Span)`
   vertical-align: middle;
@@ -285,6 +287,7 @@ const StyledSwitch = (props) => {
     name: icon,
     fontSize: props.iconFontSize !== null ? props.iconFontSize : undefined,
     desktopFontSize: props.desktopIconFontSize !== null ? props.desktopIconFontSize : undefined,
+    disabled: props.disabled,
   }
 
   return props.type === 'toggle'
@@ -362,7 +365,7 @@ class SwitchBase extends Component<Props> {
           </StyledLabel>
         )}
 
-        <StyledSwitch checked={checked} {...other} />
+        <StyledSwitch checked={checked} disabled={disabled} {...other} />
 
         {(labelPlacement === 'end' && label !== null) && (
           <StyledLabel {...otherLabelProps}>
