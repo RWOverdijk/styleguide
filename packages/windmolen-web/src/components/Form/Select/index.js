@@ -46,6 +46,7 @@ const StyledSelect = styled.select`
   padding: 9px 50px 9px 20px;
   width: 100%;
   -webkit-appearance: none;
+  -moz-appearance: none;
 `;
 
 const Select = ({ children, label, id, ...props }: Props) => (
