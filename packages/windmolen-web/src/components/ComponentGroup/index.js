@@ -72,7 +72,7 @@ const getSeparator = (type, placement) => {
     case 'border':
       if (placement) {
         return `
-          border-${placement}: 1px solid ${colors.silver};
+          border-${placement}: 1px solid ${colors.gallery};
         `;
       }
   }
