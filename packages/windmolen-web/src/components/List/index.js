@@ -40,7 +40,7 @@ type ItemProps = {
 
 type ExpandableItemProps = ItemProps & {
   handleClick: Function,
-  defaultExpanded: boolean,
+  isExpanded: boolean,
   title: Node,
   children?: Node
 }
@@ -94,7 +94,7 @@ const ItemWithRotatedIcon = styled(Item)`
 
 class ExpandableItem extends Component<ExpandableItemProps, { isExpanded: boolean }> {
   static defaultProps = {
-    defaultExpanded: false,
+    isExpanded: false,
     handleClick() {}
   };
 
@@ -102,8 +102,14 @@ class ExpandableItem extends Component<ExpandableItemProps, { isExpanded: boolea
     super(props);
 
     this.state = {
-      isExpanded: props.defaultExpanded
+      isExpanded: props.isExpanded
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isExpanded !== this.props.isExpanded) {
+      this.setState({ isExpanded: nextProps.isExpanded });
+    }
   }
 
   toggleExpanded = () => {
