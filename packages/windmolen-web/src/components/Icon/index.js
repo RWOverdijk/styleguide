@@ -124,6 +124,7 @@ spritesheet.names = [
   'checkbox--checked',
   'checkmark',
   'close',
+  'keychain',
 ];
 
 const StyledSpan = styled(Span).attrs({
