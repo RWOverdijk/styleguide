@@ -19,3 +19,14 @@ import { H1, H2, H3, H4, H5 } from './'
   <H5>Barely a heading at all</H5>
 </Playground>
 
+## Custom tag
+The main purpose of being able to do this for headings is SEO.
+Some things should be rendered as a `span` but visually appear like a heading.
+
+<Playground wrapper={Wrapper}>
+  <H1 as="h3">h1 styling rendered as h3</H1>
+  <H4 as="h1">h4 styling rendered as h1</H4>
+  <H3 as="h2">h3 styling rendered as h2</H3>
+  <H5 as="h4">h5 styling rendered as h4</H5>
+  <H2 as="span">h1 styling rendered as span</H2>
+</Playground>

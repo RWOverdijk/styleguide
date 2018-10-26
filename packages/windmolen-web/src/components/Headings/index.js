@@ -1,62 +1,111 @@
+import React, { type Node } from 'react';
 import styled from 'styled-components';
 import Base from '../Base';
 import { colors } from '../../globals';
 import { media } from 'styled-bootstrap-grid';
 
-const H1 = styled(Base.withComponent('h1')).attrs({
-  fontSize: 'h1',
-})`
-  color: ${colors.charcoalGray};
-  font-weight: 800;
-  margin: 0 0 10px;
+type Props = {
+  as: string,
+};
 
-  ${media.desktop`
-    margin: 0 0 50px;
-  `}
-`;
+const H1 = ({ as: tagName, ...props }: Props) => {
+  const Element = styled(Base.withComponent(tagName)).attrs({
+    fontSize: 'h1',
+    ...props,
+  })`
+    color: ${colors.charcoalGray};
+    font-weight: 800;
+    margin: 0 0 10px;
 
-const H2 = styled(Base.withComponent('h2')).attrs({
-  fontSize: 'h2',
-})`
-  color: ${colors.charcoalGray};
-  font-weight: 800;
-  margin: 0 0 10px
+    ${media.desktop`
+      margin: 0 0 50px;
+    `}
+  `;
+  return <Element />;
+};
 
-  ${media.desktop`
-    margin: 0 0 20px;
-  `}
-`;
+H1.defaultProps = {
+  as: 'h1',
+};
 
-const H3 = styled(Base.withComponent('h3')).attrs({
-  fontSize: 'h3',
-})`
-  color: ${colors.charcoalGray};
-  font-weight: 800;
-  margin: 0 0 10px
 
-  ${media.desktop`
-    margin: 0 0 20px;
-  `}
-`;
+const H2 = ({ as: tagName, ...props }: Props) => {
+  const Element = styled(Base.withComponent(tagName)).attrs({
+    fontSize: 'h2',
+    ...props,
+  })`
+    color: ${colors.charcoalGray};
+    font-weight: 800;
+    margin: 0 0 10px
 
-const H4 = styled(Base.withComponent('h4')).attrs({
-  fontSize: 'h4',
-})`
-  color: ${colors.charcoalGray};
-  font-weight: 800;
-  margin: 0 0 10px
-`;
+    ${media.desktop`
+      margin: 0 0 20px;
+    `}
+  `;
+  return <Element />;
+};
 
-const H5 = styled(Base.withComponent('h5')).attrs({
-  fontSize: 'h5',
-})`
-  color: ${colors.charcoalGray};
-  font-weight: 700;
-  margin: 0 0 10px
+H2.defaultProps = {
+  as: 'h2',
+};
 
-  ${media.desktop`
-    margin: 0 0 20px;
-  `}
-`;
+
+const H3 = ({ as: tagName, ...props }: Props) => {
+  const Element = styled(Base.withComponent(tagName)).attrs({
+    fontSize: 'h3',
+    ...props,
+  })`
+    color: ${colors.charcoalGray};
+    font-weight: 800;
+    margin: 0 0 10px
+
+    ${media.desktop`
+      margin: 0 0 20px;
+    `}
+  `;
+  return <Element />;
+};
+
+H3.defaultProps = {
+  as: 'h3',
+};
+
+
+const H4 = ({ as: tagName, ...props }: Props) => {
+  const Element = styled(Base.withComponent(tagName)).attrs({
+    fontSize: 'h4',
+    ...props,
+  })`
+    color: ${colors.charcoalGray};
+    font-weight: 800;
+    margin: 0 0 10px
+  `;
+  return <Element />;
+};
+
+H4.defaultProps = {
+  as: 'h4',
+};
+
+
+const H5 = ({ as: tagName, ...props }: Props) => {
+  const Element = styled(Base.withComponent(tagName)).attrs({
+    fontSize: 'h5',
+    ...props,
+  })`
+    color: ${colors.charcoalGray};
+    font-weight: 700;
+    margin: 0 0 10px
+
+    ${media.desktop`
+      margin: 0 0 20px;
+    `}
+  `;
+  return <Element />;
+};
+
+H5.defaultProps = {
+  as: 'h5',
+};
 
 export { H1, H2, H3, H4, H5 };
