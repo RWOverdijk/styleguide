@@ -155,6 +155,8 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
     margin: 0 10px 0 -10px;
   }
 
+  &:focus,
+  &:active,
   &:hover {
     background-color: ${variant('hoverBackgroundColor')};
     color: ${variant('hoverColor')};
