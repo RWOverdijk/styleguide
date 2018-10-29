@@ -1,0 +1,74 @@
+---
+name: VideoContentBlock
+menu: Elements
+route: /Elements/VideoContentBlock
+---
+
+import { Playground, PropsTable } from 'docz'
+import Wrapper from '../Wrapper';
+import { colors } from '../../globals';
+import VideoContentBlock from './'
+import Paragraph from '../Paragraph';
+import { H2 } from '../Headings';
+import Button from '../Button';
+
+# VideoContentBlock
+
+## Props
+<PropsTable of={VideoContentBlock} />
+
+## Single youtube embed
+<Playground wrapper={Wrapper}>
+  <VideoContentBlock
+    video={{
+      src: 'https://www.youtube.com/watch?v=ZvqkB4DGIR4',
+    }}
+  >
+    <H2>Het ontstaan Vandebron</H2>
+    <Paragraph>
+      Vandebron is ontstaan vanuit het geloof in positieve verandering: het
+      versnellen van de transitie naar 100% duurzame energie. Bijdragen aan
+      deze verandering hoeft helemaal niet ingewikkeld te zijn. We bieden
+      slimme energietoepassingen die goed zijn voor de wereld en goed voor jou.
+    </Paragraph>
+    <Button theme="alternate">Lees meer</Button>
+  </VideoContentBlock>
+</Playground>
+
+## Single youtube embed - flipped
+<Playground wrapper={Wrapper}>
+  <VideoContentBlock
+    video={{
+      src: 'https://www.youtube.com/watch?v=8vunYmpD4Ts',
+    }}
+    flipped
+  >
+    <H2>Het ontstaan Vandebron</H2>
+    <Paragraph>
+      Vandebron is ontstaan vanuit het geloof in positieve verandering: het
+      versnellen van de transitie naar 100% duurzame energie. Bijdragen aan
+      deze verandering hoeft helemaal niet ingewikkeld te zijn. We bieden
+      slimme energietoepassingen die goed zijn voor de wereld en goed voor jou.
+    </Paragraph>
+    <Button theme="alternate">Lees meer</Button>
+  </VideoContentBlock>
+</Playground>
+
+## Single youtube embed - no shadow
+<Playground wrapper={Wrapper}>
+  <VideoContentBlock
+    video={{
+      src: 'https://www.youtube.com/watch?v=ZvqkB4DGIR4',
+    }}
+    noShadow
+  >
+    <H2>Het ontstaan Vandebron</H2>
+    <Paragraph>
+      Vandebron is ontstaan vanuit het geloof in positieve verandering: het
+      versnellen van de transitie naar 100% duurzame energie. Bijdragen aan
+      deze verandering hoeft helemaal niet ingewikkeld te zijn. We bieden
+      slimme energietoepassingen die goed zijn voor de wereld en goed voor jou.
+    </Paragraph>
+    <Button theme="alternate">Lees meer</Button>
+  </VideoContentBlock>
+</Playground>
