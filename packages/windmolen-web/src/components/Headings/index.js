@@ -10,16 +10,43 @@ type HeadingProps = {
   size: 'h1' | 'h2' | 'h3' | 'h4' | 'h5',
 };
 
+const getFontWeight = (size) => {
+  switch (size) {
+    case 'h5':
+      return 700;
+    case 'h1':
+    case 'h2':
+    case 'h3':
+    case 'h4':
+    default:
+      return 800;
+  }
+};
+
+const getMargin = (size) => {
+  switch (size) {
+    case 'h1':
+      return '0 0 50px';
+    case 'h2':
+    case 'h3':
+    case 'h5':
+      return '0 0 20px';
+    case 'h4':
+    default:
+      return '0 0 10px';
+  }
+};
+
 const getElement = ({ as, size, ...props }: HeadingProps) => styled(Base.withComponent(as)).attrs({
   fontSize: size,
   ...props,
 })`
   color: ${colors.charcoalGray};
-  font-weight: 800;
+  font-weight: ${props => getFontWeight(size)};
   margin: 0 0 10px;
 
   ${media.desktop`
-    margin: 0 0 50px;
+    margin: ${props => getMargin(size)};
   `}
 `;
 
