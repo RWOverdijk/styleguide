@@ -23,7 +23,7 @@ export type Props = {
   children?: Node
 };
 
-const StyledContentBlock = styled(Base.withComponent('div'))`
+const StyledVideoContentBlock = styled(Base.withComponent('div'))`
   ${media.desktop`
     min-height: 510px;
     position: relative;
@@ -112,7 +112,7 @@ const getEmbedMediaURL = (source) => {
   }
 };
 
-const ContentBlock = ({ children, ...props }: Props) => {
+const VideoContentBlock = ({ children, ...props }: Props) => {
   const colAttrs = props.flipped ? {
     lg: 5,
     lgOffset: 7,
@@ -122,7 +122,7 @@ const ContentBlock = ({ children, ...props }: Props) => {
 
   return (
     <Animate.Block>
-      <StyledContentBlock {...props}>
+      <StyledVideoContentBlock {...props}>
         <div className="content-block--video-container">
           <div className="content-block--video-wrapper">
             <iframe width="560" height="349" src={getEmbedMediaURL(props.video.src)} frameBorder="0" allowFullscreen></iframe>
@@ -136,14 +136,14 @@ const ContentBlock = ({ children, ...props }: Props) => {
             </Col>
           </Row>
         </StyledContainer>
-      </StyledContentBlock>
+      </StyledVideoContentBlock>
     </Animate.Block>
   );
 };
 
-ContentBlock.defaultProps = {
+VideoContentBlock.defaultProps = {
   flipped: false,
   noShadow: false
 };
 
-export default ContentBlock;
+export default VideoContentBlock;
