@@ -33,7 +33,7 @@ const StyledVideoContentBlock = styled(Base.withComponent('div'))`
 
 
 
-  .content-block--video-container {
+  .video-content-block--video-container {
     &:before,
     &:after {
       content: '';
@@ -43,7 +43,7 @@ const StyledVideoContentBlock = styled(Base.withComponent('div'))`
     }
   }
 
-  .content-block--video-wrapper {
+  .video-content-block--video-wrapper {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
@@ -63,7 +63,7 @@ const StyledVideoContentBlock = styled(Base.withComponent('div'))`
     }
   }
 
-  .content-block--video-container {
+  .video-content-block--video-container {
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
@@ -123,15 +123,15 @@ const VideoContentBlock = ({ children, ...props }: Props) => {
   return (
     <Animate.Block>
       <StyledVideoContentBlock {...props}>
-        <div className="content-block--video-container">
-          <div className="content-block--video-wrapper">
+        <div className="video-content-block--video-container">
+          <div className="video-content-block--video-wrapper">
             <iframe width="560" height="349" src={getEmbedMediaURL(props.video.src)} frameBorder="0" allowFullscreen></iframe>
           </div>
           {this}
         </div>
         <StyledContainer>
           <Row>
-            <Col className="content-block--content-wrapper" {...colAttrs}>
+            <Col className="video-content-block--content-wrapper" {...colAttrs}>
               {children}
             </Col>
           </Row>
