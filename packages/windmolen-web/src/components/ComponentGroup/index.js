@@ -40,7 +40,7 @@ export type Props = {
   /** Expect the placement of the separator. */
   separatorPlacement?: SeparatorPlacement,
 
-  wrapper?: string,
+  as?: string,
   children: Node,
 };
 
@@ -78,7 +78,7 @@ const getSeparator = (type, placement) => {
   }
 };
 
-const StyledComponentGroup = styled(Base.withComponent('div'))`
+const StyledComponentGroup = ({ as, ...props }, Props) => styled(Base.withComponent(as)).attrs(props)`
     ${props => getSeparator(props.separator, props.separatorPlacement)}
     ${props => getSpacing('mobile', props.divider, props.spacing, 'margin', 'top-bottom')}
     ${props => getSpacing('mobile', props.divider, props.padding, 'padding', 'top-bottom')}
@@ -88,6 +88,21 @@ const StyledComponentGroup = styled(Base.withComponent('div'))`
       ${props => getSpacing('desktop', props.divider, props.padding, 'padding', 'top-bottom')}
     `}
   `;
+
+class ComponentGroupElement extends React.PureComponent<Props> {
+  constructor(props) {
+    super(props);
+    const StyledElement = StyledComponentGroup(props);
+    this.state = { StyledElement };
+  }
+
+  render() {
+    const { StyledElement } = this.state;
+    const { as, ...props } = this.props; // eslint-disable-line no-unused-vars
+
+    return <StyledElement {...props} />;
+  }
+}
 
 const StyledComponentChild = styled(Base.withComponent('div'))`
   & + & {
@@ -101,19 +116,19 @@ const StyledComponentChild = styled(Base.withComponent('div'))`
 
 const ComponentGroup = ({ children, ...props }: Props) => {
   return (
-    <StyledComponentGroup {...props}>
+    <ComponentGroupElement {...props}>
       {React.Children.map(children, (child) => (
         <StyledComponentChild>
           {child}
         </StyledComponentChild>
       ))}
-    </StyledComponentGroup>
+    </ComponentGroupElement>
   );
 };
 
 ComponentGroup.defaultProps = {
   divider: 1,
-  wrapper: 'div',
+  as: 'div',
 };
 
 export default ComponentGroup;

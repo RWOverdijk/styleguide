@@ -40,6 +40,28 @@ get separated by default with a "medium" spacing.
   </ComponentGroup>
 </Playground>
 
+## Different wrapper element
+<Playground wrapper={Wrapper}>
+  <ComponentGroup padding="large" as="section">
+    <section>
+      <H2>Lorem ipsum</H2>
+    </section>
+    <section>
+      <H2>Lorem ipsum spaced</H2>
+    </section>
+  </ComponentGroup>
+
+  <ComponentGroup
+    padding="large"
+    separator="border"
+    separatorPlacement="top"
+  >
+    <section>
+      <H2>Lorem ipsum</H2>
+    </section>
+  </ComponentGroup>
+</Playground>
+
 ## Example with different values on different sides
 <Playground wrapper={Wrapper}>
   <ComponentGroup padding="large">
