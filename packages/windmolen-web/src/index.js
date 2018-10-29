@@ -9,6 +9,7 @@ export { default as Span } from './components/Span';
 export { default as Wrapper } from './components/Wrapper';
 export { H1, H2, H3, H4, H5 } from './components/Headings';
 export { default as ContentBlock } from './components/ContentBlock';
+export { default as VideoContentBlock } from './components/VideoContentBlock';
 export { default as List } from './components/List';
 export { default as ComponentGroup } from './components/ComponentGroup';
 export { default as Link } from './components/Link';
