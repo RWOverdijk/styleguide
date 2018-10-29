@@ -10,7 +10,7 @@ import Animate from '../Animate';
 import Base from '../Base';
 
 export type Props = {
-  /** An array of the images being shown. */
+  /** An video object containing at least a 'src' property. */
   video?: object,
 
   /** When specified, the content/image container will be flipped. */
