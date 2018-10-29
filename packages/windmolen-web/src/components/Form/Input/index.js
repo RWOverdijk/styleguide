@@ -136,7 +136,6 @@ const StyledInputElement = styled(Base.withComponent('input'))`
 `;
 
 class StyledInput extends Component<InputProps, { value: string }> {
-  input: ?mixed;
   onChange: () => void;
 
   constructor(props: InputProps) {
@@ -144,7 +143,6 @@ class StyledInput extends Component<InputProps, { value: string }> {
 
     this.state = { value: '' };
 
-    this.input = React.createRef();
     this.onChange = this.onChange.bind(this);
   }
 
@@ -161,7 +159,7 @@ class StyledInput extends Component<InputProps, { value: string }> {
   render() {
     // don't let props.onChange overwrite this.onChange
     // eslint-disable-next-line no-unused-vars
-    const { onChange, id, ...props } = this.props;
+    const { onChange, id, innerRef, ...props } = this.props;
 
     // only show the native placeholder if we're not using ::after to fake it
     const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
@@ -171,7 +169,7 @@ class StyledInput extends Component<InputProps, { value: string }> {
     return (
       <StyledInputWrapper {...props}>
         <StyledInputElement
-          innerRef={this.input}
+          innerRef={innerRef}
           value={this.state.value}
           onChange={this.onChange}
           id={id}
