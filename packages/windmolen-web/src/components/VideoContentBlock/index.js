@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment, type Node } from 'react';
+import React, { type Node } from 'react';
 import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
 import Container from '../Bootstrap/Container';
@@ -11,7 +11,7 @@ import Base from '../Base';
 
 export type Props = {
   /** An array of the images being shown. */
-  video?: array,
+  video?: object,
 
   /** When specified, the content/image container will be flipped. */
   flipped?: boolean,
@@ -31,27 +31,9 @@ const StyledContentBlock = styled(Base.withComponent('div'))`
     align-items: center;
   `}
 
-  /* one image */
-  .content-block--image-wrapper:first-child:nth-last-child(1) {
-    ${media.desktop`
-      height: 510px;
-    `}
 
-    .content-block--image {
-      height: 100%;
-      width: 100%;
-      max-width: 100%;
-      object-fit: cover;
 
-      ${media.desktop`
-        width: auto;
-        float: ${props => props.flipped ? 'right' : 'left'};
-      `}
-    }
-  }
-
-  .content-block--images-container,
-  .content-block--image-wrapper {
+  .content-block--video-container {
     &:before,
     &:after {
       content: '';
@@ -81,7 +63,7 @@ const StyledContentBlock = styled(Base.withComponent('div'))`
     }
   }
 
-  .content-block--images-container {
+  .content-block--video-container {
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
@@ -141,7 +123,7 @@ const ContentBlock = ({ children, ...props }: Props) => {
   return (
     <Animate.Block>
       <StyledContentBlock {...props}>
-        <div className="content-block--images-container">
+        <div className="content-block--video-container">
           <div className="content-block--video-wrapper">
             <iframe width="560" height="349" src={getEmbedMediaURL(props.video.src)} frameBorder="0" allowFullscreen></iframe>
           </div>
