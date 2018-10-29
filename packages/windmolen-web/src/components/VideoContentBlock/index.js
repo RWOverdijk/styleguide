@@ -75,6 +75,7 @@ const StyledVideoContentBlock = styled(Base.withComponent('div'))`
       position: absolute;
       ${props => props.flipped ? 'right: 50%' : 'left: 50%'};
       width: 50%;
+      max-width: 675px;
     `}
   }
 `;
