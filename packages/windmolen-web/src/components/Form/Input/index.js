@@ -276,7 +276,7 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
   return (
     <Container className={className}>
       {props.label && (
-        <StyledLabel for={props.id}>{props.label}</StyledLabel>
+        <StyledLabel htmlFor={props.id}>{props.label}</StyledLabel>
       )}
 
       {props.suggestions ? (
