@@ -196,7 +196,9 @@ const StyledSwitchBaseButton = styled.div`
 
   &:active,
   &:focus {
-    opacity: 1;
+    ${media.desktop`
+      opacity: 1;
+    `}
   }
 
   ${props => !props.checked && css`
