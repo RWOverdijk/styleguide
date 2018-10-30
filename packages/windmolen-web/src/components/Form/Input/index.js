@@ -259,10 +259,11 @@ const StyledAutoSuggestion = styled(Base)`
     font-size: 16px;
     line-height: 32px;
 
+    &.highlighted,
     &:focus,
     &:active,
     &:hover {
-      color: ${colors.silver};
+      background-color: ${colors.gallery};
     }
 
     &:hover {
