@@ -37,7 +37,7 @@ const getMargin = (size) => {
   }
 };
 
-const getElement = ({ as, size, ...props }: HeadingProps) => styled(Base.withComponent(as)).attrs({
+const getElement = ({ as, size, ...props }: HeadingProps) => Base.withComponent(as).extend.attrs({
   fontSize: size,
   ...props,
 })`
