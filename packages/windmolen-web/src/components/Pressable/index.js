@@ -123,7 +123,7 @@ const getVariantProperty = (variant: VariantType, property: string): string | nu
 const variant = (property, fallbackProperty) => props =>
   getVariantProperty(props.variant, property) || getVariantProperty(props.variant, fallbackProperty);
 
-const pressableFactory = (element, otherProps): ReactComponentStyled<PressableProps> => styled(Base.withComponent(element)).attrs(otherProps)`
+const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base.withComponent(element).extend`
   background-color: ${variant('backgroundColor')};
   border: ${variant('border')};
   box-shadow: ${variant('shadow')};
