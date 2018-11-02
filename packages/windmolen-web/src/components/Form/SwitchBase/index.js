@@ -316,10 +316,9 @@ class SwitchBase extends Component<Props> {
     if (!this.props.disabled) {
       const checked = !this.state.checked;
       this.setState({
-        ...this.state,
         checked,
       });
-  
+
       // Give onChange feedback to the parent.
       this.props.onChange(checked);
     }
