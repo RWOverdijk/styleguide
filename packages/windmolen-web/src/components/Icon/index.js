@@ -125,6 +125,12 @@ spritesheet.names = [
   'checkmark',
   'close',
   'keychain',
+  'mail',
+  'gmail',
+  'whatsapp',
+  'messenger',
+  'linkedin',
+  'hyperlink',
 ];
 
 const StyledSpan = styled(Span).attrs({
