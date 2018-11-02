@@ -10,7 +10,7 @@ export type Props = {
   hideIcon?: boolean,
   children?: Node,
   small?: boolean,
-  variant?: VariantType
+  variant?: VariantType,
   iconOnly?: boolean,
 };
 
