@@ -133,6 +133,7 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
   text-decoration: ${variant('textDecoration')};
   height: ${props => props.small ? '50px' : '60px'};
   padding: 0;
+  vertical-align: middle;
 
   ${props => props.variant !== 'text' && props.variant !== 'text-boring' && !props.iconOnly ? `
     display: inline-flex;
@@ -144,14 +145,18 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
     padding-left: 20px;
     padding-right: 20px;
   ` : `
-    display: inline;
+    display: inline-flex;
+    align-items: center;
     width: auto;
   `}
+
+  ${props => props.iconOnly && `justify-content: center;`}
 
   width: ${props => {
     if (props.iconOnly) return props.small ? '50px' : '60px';
     return 'auto';
   }}
+
 
   ${StyledRightIcon} {
     background-position-y: -${variant('iconVariant')}em;
