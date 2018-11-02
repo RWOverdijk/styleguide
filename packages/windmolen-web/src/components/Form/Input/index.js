@@ -104,9 +104,6 @@ const StyledInputElement = styled(Base.withComponent('input'))`
   border: 0;
   box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.12);
   color: ${props => props.disabled ? colors.silver : colors.warmGray};
-  ${props => props.disabled && `
-    cursor: not-allowed;
-  `}
   display: block;
   outline: 0;
   padding: 9px 20px;
@@ -116,6 +113,12 @@ const StyledInputElement = styled(Base.withComponent('input'))`
   position: relative;
   z-index: 2;
   font-size: 16px;
+
+  &&& {
+    ${props => props.disabled && `
+      cursor: not-allowed;
+    `}
+  }
 
   &:active,
   &:focus {
