@@ -11,6 +11,7 @@ export type Props = {
   children?: Node,
   small?: boolean,
   variant?: VariantType
+  iconOnly?: boolean,
 };
 
 const Button = (props: Props) => <Pressable {...props} />;
@@ -20,6 +21,7 @@ Button.defaultProps = {
   variant: 'button-primary',
   hideIcon: false,
   iconPlacement: 'end',
+  iconOnly: false,
 };
 
 export default Button;
