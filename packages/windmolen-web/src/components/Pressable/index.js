@@ -152,11 +152,8 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
     display: inline-flex;
     align-items: center;
     width: auto;
+    justify-content: center;
   ` : ``}
-
-  ${props => props.variant === 'text-boring'}
-
-  ${props => props.iconOnly && `justify-content: center;`}
 
   width: ${props => {
     if (props.iconOnly) return props.small ? '50px' : '60px';
