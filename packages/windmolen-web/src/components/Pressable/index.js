@@ -145,10 +145,16 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
     padding-left: 20px;
     padding-right: 20px;
   ` : `
+    display: inline;
+  `}
+
+  ${props => props.iconOnly ? `
     display: inline-flex;
     align-items: center;
     width: auto;
-  `}
+  ` : ``}
+
+  ${props => props.variant === 'text-boring'}
 
   ${props => props.iconOnly && `justify-content: center;`}
 

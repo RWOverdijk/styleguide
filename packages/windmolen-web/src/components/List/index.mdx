@@ -6,6 +6,7 @@ route: /Elements/List
 
 import { Playground, PropsTable } from 'docz';
 import Wrapper from '../Wrapper';
+import Link from '../Link';
 import List from './';
 
 # List
@@ -36,6 +37,18 @@ import List from './';
     <List.Item>Wind energy</List.Item>
     <List.Item icon="sun">Solar energy</List.Item>
     <List.Item icon="bio">Bio energy</List.Item>
+  </List>
+</Playground>
+
+## With links
+<Playground wrapper={Wrapper}>
+  <List>
+    <List.Item key="with-icons-1">
+      <Link variant="text-boring" href="#">First link</Link>
+    </List.Item>
+    <List.Item key="with-icons-2">
+      <Link variant="text-boring" href="#">Second link</Link>
+    </List.Item>
   </List>
 </Playground>
 
