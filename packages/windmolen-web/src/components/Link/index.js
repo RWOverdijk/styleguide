@@ -9,6 +9,7 @@ const Link = (props: LinkProps) => <Pressable {...props} />;
 Link.defaultProps = {
   as: 'a',
   variant: 'text',
+  iconOnly: false,
 };
 
 export default Link;
