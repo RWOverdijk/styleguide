@@ -8,16 +8,22 @@ import Notification from './Notification';
 
 class DashboardHeaderNotifications extends React.Component {
   static propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
+    activeByDefault: PropTypes.bool
   };
 
   static defaultProps = {
-    children: null
+    children: null,
+    activeByDefault: false
   };
 
-  state = {
-    isActive: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isActive: props.activeByDefault
+    };
+  }
 
   toggle = () => {
     if (!this.props.children) {
