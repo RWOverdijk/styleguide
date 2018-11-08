@@ -2,9 +2,9 @@
 import React, { type Node, Component } from 'react';
 import styled from 'styled-components';
 import Autocomplete from 'react-autocomplete';
-import { media } from 'styled-bootstrap-grid';
 import Base from '../../Base';
 import Icon from '../../Icon';
+import Error from '../Error';
 import { colors } from '../../../globals';
 
 type InputProps = {
@@ -197,12 +197,6 @@ const StyledLabel = styled(Base.withComponent('label'))`
   font-size: 18px;
 `;
 
-const StyledErrorMessage = styled(Base)`
-  font-size: 14px;
-  color: ${colors.red};
-  line-height: 2;
-`;
-
 const StyledIcon = styled(Icon)`
   position: absolute;
   right: 5px;
@@ -308,7 +302,7 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
       )}
 
       {props.error && (
-        <StyledErrorMessage>{props.error}</StyledErrorMessage>
+        <Error>{props.error}</Error>
       )}
 
       {props.icon && (
