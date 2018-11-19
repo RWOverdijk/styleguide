@@ -50,21 +50,21 @@ const getInputState = (props: InputProps): string => {
   return colors.charcoalGray;
 };
 
-const StyledInputWrapper = styled(Base.withComponent('div'))`
+const StyledInputWrapper = styled.div`
   position: relative;
 
   &::after {
     content: "${props => props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder}";
-    color: red;
     color: ${props => props.disabled ? colors.silver : colors.warmGray};
     position: absolute;
     top: calc(1em + 1px);
     right: 20px;
     z-index: 3;
+    font-size: 14px;
   }
 `;
 
-const StyledInputLine = styled(Base.withComponent('div'))`
+const StyledInputLine = styled.div`
   transition-timing-function: ease-out;
   transition-duration: 0.2s;
   transition-property: background, width;
@@ -99,7 +99,7 @@ const rightPaddingWithIconAndPlaceholder = (props) => {
   return `${iconPadding + placeholderPadding}px`;
 };
 
-const StyledInputElement = styled(Base.withComponent('input'))`
+const StyledInputElement = styled.input`
   background-color: ${colors.alabaster};
   border: 0;
   box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.12);
@@ -135,54 +135,28 @@ const StyledInputElement = styled(Base.withComponent('input'))`
   }
 `;
 
-class StyledInput extends Component<InputProps, { value: string }> {
-  onChange: () => void;
-
-  constructor(props: InputProps) {
-    super(props);
-
-    this.state = { value: '' };
-
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange(event: SyntheticInputEvent<HTMLInputElement>) {
-    const { value } = event.target;
-
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(event);
-    }
-
-    this.setState({ value });
-  }
-
-  render() {
-    // don't let props.onChange overwrite this.onChange
-    // eslint-disable-next-line no-unused-vars
-    const { onChange, id, innerRef, ...props } = this.props;
-
-    // only show the native placeholder if we're not using ::after to fake it
-    const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
+const StyledInput = ({ ...props }) => {
+  // only show the native placeholder if we're not using ::after to fake it
+  // const inputPlaceholder = placeholderAlwaysVisible && placeholderRight && placeholder ? '' : placeholder;
+  const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
       ? ''
       : props.placeholder;
 
-    return (
-      <StyledInputWrapper {...props}>
-        <StyledInputElement
-          innerRef={innerRef}
-          value={this.state.value}
-          onChange={this.onChange}
-          id={id}
-          {...props}
-          placeholder={placeholder}
-        />
-        <StyledInputLine value={this.state.value} {...props} />
-      </StyledInputWrapper>
-    );
-  }
-}
+  return (
+    <StyledInputWrapper {...props}>
+      <StyledInputElement {...props} placeholder={placeholder} />
+      <StyledInputLine
+        value={props.value}
+        disabled={props.disabled}
+        touched={props.touched}
+        isValid={props.isValid}
+        error={props.error}
+      />
+    </StyledInputWrapper>
+  );
+};
 
-const Container = styled(Base)`
+const Container = styled.div`
   position: relative;
 `;
 
@@ -205,7 +179,7 @@ const StyledIcon = styled(Icon)`
   top: 5px;
 `;
 
-const StyledIconContainer = styled(Base)`
+const StyledIconContainer = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
@@ -275,7 +249,7 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
   return (
     <Container className={className}>
       {props.label && (
-        <StyledLabel for={props.id}>{props.label}</StyledLabel>
+        <StyledLabel htmlFor={props.id}>{props.label}</StyledLabel>
       )}
 
       {props.suggestions ? (
@@ -284,7 +258,6 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
           wrapperStyle={{  }}
           renderInput={({ ref, value, ...inputProps }) => ( // eslint-disable-line no-unused-vars
             <StyledInput
-              innerRef={(node) => ref(node)}
               {...inputProps}
               {...props}
             />
@@ -317,7 +290,6 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
 
 Input.defaultProps = {
   type: 'text',
-  fontSize: 'body-xsmall',
   placeholderRightPadding: 35,
   iconVariant: 'primary'
 };
