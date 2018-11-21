@@ -138,7 +138,7 @@ const StyledInputElement = styled.input`
   }
 `;
 
-const StyledInput = ({ innerRef, ...props }) => {
+const StyledInput = ({ ...props }) => {
   // only show the native placeholder if we're not using ::after to fake it
   // const inputPlaceholder = placeholderAlwaysVisible && placeholderRight && placeholder ? '' : placeholder;
   const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
@@ -153,9 +153,8 @@ const StyledInput = ({ innerRef, ...props }) => {
       disabled={props.disabled}
     >
       <StyledInputElement
-        innerRef={innerRef}
-        placeholder={placeholder}
         {...props}
+        placeholder={placeholder}
       />
       <StyledInputLine
         value={props.value}
