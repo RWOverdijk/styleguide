@@ -138,7 +138,7 @@ const StyledInputElement = styled.input`
   }
 `;
 
-const StyledInput = ({ ...props }) => {
+const StyledInput = ({ innerRef, ...props }) => {
   // only show the native placeholder if we're not using ::after to fake it
   // const inputPlaceholder = placeholderAlwaysVisible && placeholderRight && placeholder ? '' : placeholder;
   const placeholder = props.placeholderAlwaysVisible && props.placeholderRight && props.placeholder
@@ -152,7 +152,11 @@ const StyledInput = ({ ...props }) => {
       placeholder={props.placeholder}
       disabled={props.disabled}
     >
-      <StyledInputElement {...props} placeholder={placeholder} />
+      <StyledInputElement
+        innerRef={innerRef}
+        placeholder={placeholder}
+        {...props}
+      />
       <StyledInputLine
         value={props.value}
         disabled={props.disabled}
@@ -261,6 +265,7 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
           wrapperStyle={{  }}
           renderInput={({ ref, value, ...inputProps }) => ( // eslint-disable-line no-unused-vars
             <StyledInput
+              innerRef={(node) => ref(node)}
               {...inputProps}
               {...props}
             />
