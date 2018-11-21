@@ -143,7 +143,12 @@ const StyledInput = ({ ...props }) => {
       : props.placeholder;
 
   return (
-    <StyledInputWrapper {...props}>
+    <StyledInputWrapper
+      placeholderAlwaysVisible={props.placeholderAlwaysVisible}
+      placeholderRight={props.placeholderRight}
+      placeholder={props.placeholder}
+      disabled={props.disabled}
+    >
       <StyledInputElement {...props} placeholder={placeholder} />
       <StyledInputLine
         value={props.value}
