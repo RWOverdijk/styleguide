@@ -2,9 +2,9 @@
 import React, { type Node, Component } from 'react';
 import styled from 'styled-components';
 import Autocomplete from 'react-autocomplete';
-import { media } from 'styled-bootstrap-grid';
 import Base from '../../Base';
 import Icon from '../../Icon';
+import Error from '../Error';
 import { colors } from '../../../globals';
 
 type InputProps = {
@@ -104,9 +104,6 @@ const StyledInputElement = styled.input`
   border: 0;
   box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.12);
   color: ${props => props.disabled ? colors.silver : colors.warmGray};
-  ${props => props.disabled && `
-    cursor: not-allowed;
-  `}
   display: block;
   outline: 0;
   padding: 9px 20px;
@@ -116,6 +113,12 @@ const StyledInputElement = styled.input`
   position: relative;
   z-index: 2;
   font-size: 16px;
+
+  &&& {
+    ${props => props.disabled && `
+      cursor: not-allowed;
+    `}
+  }
 
   &:active,
   &:focus {
@@ -170,12 +173,6 @@ const StyledLabel = styled(Base.withComponent('label'))`
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 18px;
-`;
-
-const StyledErrorMessage = styled(Base)`
-  font-size: 14px;
-  color: ${colors.red};
-  line-height: 2;
 `;
 
 const StyledIcon = styled(Icon)`
@@ -238,10 +235,11 @@ const StyledAutoSuggestion = styled(Base)`
     font-size: 16px;
     line-height: 32px;
 
+    &.highlighted,
     &:focus,
     &:active,
     &:hover {
-      color: ${colors.silver};
+      background-color: ${colors.gallery};
     }
 
     &:hover {
@@ -281,7 +279,7 @@ const Input = ({ className, autoCompleteProps, iconVariant, ...props }: InputPro
       )}
 
       {props.error && (
-        <StyledErrorMessage>{props.error}</StyledErrorMessage>
+        <Error>{props.error}</Error>
       )}
 
       {props.icon && (

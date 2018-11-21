@@ -61,7 +61,6 @@ class AnimateBase extends Component<Props> {
     if (isAboveViewport) {
       this.props.onViewportEnter(false);
       this.setState({
-        ...this.state,
         withinViewport: true,
         shouldAnimate: false,
       });
@@ -90,7 +89,6 @@ class AnimateBase extends Component<Props> {
       this._delayId = setTimeout(() => {
         this.props.onViewportEnter();
         this.setState({
-          ...this.state,
           withinViewport: true,
           shouldAnimate: true,
         });

@@ -82,6 +82,7 @@ as shown in the example below.
       { label: 'pear 6',   id: 9 },
     ]}
     autoCompleteProps={{
+      onSelect: (value, item) => console.log('selected!', value, item),
       getItemValue: (item) => item.label,
       renderItem: (item, isHighlighted) => {
         // Use the 'suggestion' class to inherit the styleguide's style.
@@ -96,6 +97,8 @@ as shown in the example below.
       },
     }}
   />
+  <br/>
+  <br/>
   <br/>
   <br/>
   <br/>

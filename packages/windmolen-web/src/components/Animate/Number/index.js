@@ -23,7 +23,6 @@ class AnimateNumber extends Component<Props> {
 
   onViewportEnter(shouldAnimate = true) {
     this.setState({
-      ...this.state,
       withinViewport: true,
       shouldAnimate,
     });

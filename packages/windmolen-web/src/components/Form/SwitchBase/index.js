@@ -196,7 +196,9 @@ const StyledSwitchBaseButton = styled.div`
 
   &:active,
   &:focus {
-    opacity: 1;
+    ${media.desktop`
+      opacity: 1;
+    `}
   }
 
   ${props => !props.checked && css`
@@ -316,10 +318,9 @@ class SwitchBase extends Component<Props> {
     if (!this.props.disabled) {
       const checked = !this.state.checked;
       this.setState({
-        ...this.state,
         checked,
       });
-  
+
       // Give onChange feedback to the parent.
       this.props.onChange(checked);
     }

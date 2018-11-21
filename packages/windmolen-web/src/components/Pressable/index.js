@@ -36,6 +36,9 @@ export type PressableProps = {
   /** Name of the icon to use, same as <Icon />. */
   icon?: string,
 
+  /** Render only the icon */
+  iconOnly?: boolean,
+
   /** The placement of the icon. */
   iconPlacement?: 'start' | 'end',
 };
@@ -126,11 +129,13 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
   box-shadow: ${variant('shadow')};
   color: ${variant('color')};
   cursor: ${variant('cursor')};
-  text-align: left;
+  text-align: ${props => props.iconOnly ? 'center' : 'left'};
   text-decoration: ${variant('textDecoration')};
   height: ${props => props.small ? '50px' : '60px'};
+  padding: 0;
+  vertical-align: middle;
 
-  ${props => props.variant !== 'text' && props.variant !== 'text-boring' ? `
+  ${props => props.variant !== 'text' && props.variant !== 'text-boring' && !props.iconOnly ? `
     display: inline-flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -141,13 +146,28 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
     padding-right: 20px;
   ` : `
     display: inline;
-    width: auto;
   `}
+
+  ${props => props.iconOnly ? `
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    justify-content: center;
+  ` : ``}
+
+  width: ${props => {
+    if (props.iconOnly) return props.small ? '50px' : '60px';
+    return 'auto';
+  }}
+
 
   ${StyledRightIcon} {
     background-position-y: -${variant('iconVariant')}em;
     position: relative;
-    left: ${props => props.small ? 7 : 10}px;
+    ${props => {
+      if (props.iconOnly) return '';
+      return `left: ${props.small ? 7 : 10}px;`
+    }}
   }
 
   ${StyledLeftIcon} {
@@ -173,10 +193,13 @@ const pressableFactory = (element): ReactComponentStyled<PressableProps> => Base
   }
 
   ${media.desktop`
-    width: auto;
+    width: ${props => {
+      if (props.iconOnly) return props.small ? '40px' : '50px';
+      return 'auto';
+    }};
     height: ${props => props.small ? '40px' : '50px'};
 
-    ${StyledRightIcon} {
+    ${props => !props.iconOnly && StyledRightIcon} {
       margin-left: 10px;
     }
   `}
@@ -212,12 +235,14 @@ class Pressable extends React.PureComponent<PressableProps, {}> {
     hideIcon: false,
     icon: 'arrow-right',
     iconPlacement: 'end',
+    iconOnly: false,
   }
 
   constructor(props: PressableProps) {
     super(props);
 
-    this.WrapperComponent = pressableFactory(props.as);
+    const { as, ...otherProps } = props;
+    this.WrapperComponent = pressableFactory(as, otherProps);
   }
 
   render() {
@@ -243,7 +268,7 @@ class Pressable extends React.PureComponent<PressableProps, {}> {
     return (
       <WrapperComponent fontSize={fontSize} {...componentProps}>
         {showLeftIcon && <StyledLeftIcon name={icon} />}
-        <StyledPressableText variant={this.props.variant}>{children}</StyledPressableText>
+        {!this.props.iconOnly && <StyledPressableText variant={this.props.variant}>{children}</StyledPressableText>}
         {showRightIcon && <StyledRightIcon name={icon} />}
       </WrapperComponent>
     );
