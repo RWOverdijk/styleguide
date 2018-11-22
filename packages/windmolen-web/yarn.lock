@@ -4242,7 +4242,6 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.0.2, cosmiconfig@^5.0.5:
 countup.js@^1.9.3:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-1.9.3.tgz#ce3e50cd7160441e478f07da31895edcc0f1c9dd"
-  integrity sha1-zj5QzXFgRB5HjwfaMYle3MDxyd0=
 
 cp-file@^6.0.0:
   version "6.0.0"
@@ -10034,14 +10033,13 @@ react-copy-write@^0.7.0:
     immer "^1.2.1"
     invariant "^2.2.4"
 
-react-countup@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-4.0.0.tgz#cbce95c8f4d03fccc431bc52707dba23654621a8"
-  integrity sha512-l2GZY274KJir6Lvxahr+ZKT4xl9zzpSXO9dTvyKylm6jQcaSzk8TVECYlznTxWw4ctte3PBk+W1o3PeCXRyijg==
+react-countup@^4.0.0-alpha.6:
+  version "4.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/react-countup/-/react-countup-4.0.0-alpha.6.tgz#04d752cbc40ecfd333e9831b84896028cf3a1ef0"
   dependencies:
     countup.js "^1.9.3"
     prop-types "^15.6.2"
-    warning "^4.0.2"
+    warning "^4.0.1"
 
 react-dev-utils@^5.0.1:
   version "5.0.1"
@@ -10204,11 +10202,6 @@ react-imported-component@^4.6.2:
 react-is@^16.3.1:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
-
-react-lazyload@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-lazyload/-/react-lazyload-2.3.0.tgz#ccb134223012447074a96543954f44b055dc6185"
-  integrity sha512-0z3qmL+qtSERdfKFpn0yKXm+1Gg1ZLZBXnCzHhSGiu1L8iDARuCkbOypxEx9+ETxZvMnXj98xvWCs5jyXTuM2w==
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -12543,13 +12536,6 @@ warning@^3.0.0:
 warning@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.1.tgz#66ce376b7fbfe8a887c22bdf0e7349d73d397745"
-  dependencies:
-    loose-envify "^1.0.0"
-
-warning@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.2.tgz#aa6876480872116fa3e11d434b0d0d8d91e44607"
-  integrity sha512-wbTp09q/9C+jJn4KKJfJfoS6VleK/Dti0yqWSm6KMvJ4MRCXFQNapHuJXutJIrWV0Cf4AhTdeIe4qdKHR1+Hug==
   dependencies:
     loose-envify "^1.0.0"
 
