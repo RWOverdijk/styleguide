@@ -1,6 +1,7 @@
 /* global process */
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
 import rebase from 'rollup-plugin-rebase';
 import replace from 'rollup-plugin-post-replace';
 
@@ -17,10 +18,9 @@ export default {
     'classnames',
     'react',
     'react-autocomplete',
-    'react-countup',
-    'react-lazyload',
     'styled-components',
     'styled-bootstrap-grid',
+    'react-countup',
   ],
 
   plugins: [
@@ -56,3 +56,4 @@ export default {
     }),
   ].filter(Boolean)
 };
+

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import Base from '../Base';
+import { media } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
-import Lazyload from 'react-lazyload';
 
 type Props = {
   /** Will make the image not overflow its parent. */
@@ -46,9 +46,7 @@ const Image = ({ aspectRatio, ...props }: Props) => {
     const paddingBottom = (height / width) * 100;
     return (
       <StyledImageContainer paddingBottom={paddingBottom}>
-        <Lazyload offset={[50, 50]} height={200} resize once>
-          <StyledImage srcSet={srcSet} {...props} />
-        </Lazyload>
+        <StyledImage srcSet={srcSet} {...props} />
       </StyledImageContainer>
     );
   }
