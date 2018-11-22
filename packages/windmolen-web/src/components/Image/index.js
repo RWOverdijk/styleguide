@@ -54,7 +54,9 @@ const Image = ({ aspectRatio, ...props }: Props) => {
   }
 
   return (
-    <StyledImage srcSet={srcSet} {...props} />
+    <Lazyload offset={[50, 50]} height={200} resize once>
+      <StyledImage srcSet={srcSet} {...props} />
+    </Lazyload>
   );
 };
 
