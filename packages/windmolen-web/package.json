@@ -64,6 +64,7 @@
   "gitHead": "c2c87818829bd968dbe54faa686b4a7474c151a9",
   "dependencies": {
     "react-autocomplete": "^1.8.1",
-    "react-countup": "^4.0.0-alpha.6"
+    "react-countup": "^4.0.0-alpha.6",
+    "react-lazyload": "^2.3.0"
   }
 }
