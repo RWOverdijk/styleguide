@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Base from '../Base';
-import { media } from 'styled-bootstrap-grid';
+import Lazyload from 'react-lazyload';
 import styled from 'styled-components';
 
 type Props = {
@@ -46,13 +46,17 @@ const Image = ({ aspectRatio, ...props }: Props) => {
     const paddingBottom = (height / width) * 100;
     return (
       <StyledImageContainer paddingBottom={paddingBottom}>
-        <StyledImage srcSet={srcSet} {...props} />
+        <Lazyload offset={[50, 50]} height={200} resize once>
+          <StyledImage srcSet={srcSet} {...props} />
+        </Lazyload>
       </StyledImageContainer>
     );
   }
 
   return (
-    <StyledImage srcSet={srcSet} {...props} />
+    <Lazyload offset={[50, 50]} height={200} resize once>
+      <StyledImage srcSet={srcSet} {...props} />
+    </Lazyload>
   );
 };
 
