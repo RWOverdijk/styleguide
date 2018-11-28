@@ -12,7 +12,9 @@ type Props = {
   aspectRatio?: '16:9' | '4:3' | '1:1',
 
   /** Specify a @2x image for high dpi displays. */
-  src2x?: string
+  src2x?: string,
+
+  lazyload: boolean
 };
 
 const StyledImage = styled(Base.withComponent('img')).attrs({
@@ -38,7 +40,19 @@ const StyledImageContainer = styled.div`
   }
 `;
 
-const Image = ({ aspectRatio, ...props }: Props) => {
+const getComponent = (srcSet, lazyload, props) => {
+  if (lazyload) {
+    return (
+      <Lazyload offset={[50, 50]} height={200} resize once>
+        <StyledImage srcSet={srcSet} {...props} />
+      </Lazyload>
+    );
+  } else {
+    return <StyledImage srcSet={srcSet} {...props} />;
+  }
+};
+
+const Image = ({ aspectRatio, lazyload, ...props }: Props) => {
   const srcSet = (props.src2x ? `${props.src} 1x, ${props.src2x} 2x` : null);
 
   if (aspectRatio) {
@@ -46,24 +60,19 @@ const Image = ({ aspectRatio, ...props }: Props) => {
     const paddingBottom = (height / width) * 100;
     return (
       <StyledImageContainer paddingBottom={paddingBottom}>
-        <Lazyload offset={[50, 50]} height={200} resize once>
-          <StyledImage srcSet={srcSet} {...props} />
-        </Lazyload>
+        {getComponent(srcSet, lazyload, props)}
       </StyledImageContainer>
     );
   }
 
-  return (
-    <Lazyload offset={[50, 50]} height={200} resize once>
-      <StyledImage srcSet={srcSet} {...props} />
-    </Lazyload>
-  );
+  return getComponent(srcSet, lazyload, props);
 };
 
 Image.defaultProps = {
   responsive: true,
   aspectRatio: null,
-  src2x: null
+  src2x: null,
+  lazyload: true
 };
 
 export default Image;
